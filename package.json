@@ -1,0 +1,22 @@
+{
+  "name": "graphql codegen",
+  "version": "1.0.0",
+  "description": "A new Flutter project.",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "scripts": {
+    "generate": "graphql-codegen"
+  },
+  "author": "inopix",
+  "dependencies": {
+    "graphql": "^16.9.0"
+  },
+  "devDependencies": {
+    "@graphql-codegen/cli": "^5.0.2",
+    "@graphql-codegen/flutter-freezed": "^4.0.0",
+    "typescript": "^5.5.3"
+  }
+}

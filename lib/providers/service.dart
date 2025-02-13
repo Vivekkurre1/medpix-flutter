@@ -1,5 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:med_pix/api/client/med_client.dart';
+import 'package:med_pix/api/request_response/medicine/medicines_request.dart';
 import 'package:med_pix/api/request_response/request_response.dart';
 
 class ServicesState {
@@ -25,6 +26,7 @@ class ServicesNotifier extends StateNotifier<ServicesState> {
 
   final Map<Type, Function(Map<String, dynamic>)> _typeToJsonFactoryMap = {
     //AccountResponse: (json) => AccountResponse.fromJson(json),
+    MedicinesResponse: (json) => MedicinesResponse.fromJson(json),
   };
 
   void clear() {
@@ -97,6 +99,10 @@ class ServicesNotifier extends StateNotifier<ServicesState> {
   // Future<AccountResponse> account(AccountRequest request) {
   //   return query<AccountRequest, AccountResponse>(request);
   // }
+
+  Future<MedicinesResponse> medicines(MedicinesRequest request) {
+    return query<MedicinesRequest, MedicinesResponse>(request);
+  }
 }
 
 final servicesProvider =

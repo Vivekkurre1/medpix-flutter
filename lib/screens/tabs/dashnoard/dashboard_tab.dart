@@ -8,7 +8,6 @@ class DashboardScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isLargeScreen = MediaQuery.of(context).size.width > 600;
-
     return SingleChildScrollView(
       padding: const EdgeInsets.all(16.0),
       child: Column(

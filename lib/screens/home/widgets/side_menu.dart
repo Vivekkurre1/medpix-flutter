@@ -1,12 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:med_pix/providers/body_notifier.dart';
 import 'package:med_pix/screens/tabs/dashnoard/dashboard_tab.dart';
 import 'package:med_pix/screens/tabs/inventory/inventory_tab.dart';
 
-class SidebarMenu extends StatelessWidget {
-  final Function(Widget) onItemSelected;
+class SidebarMenu extends ConsumerStatefulWidget {
+  // final Function(Widget) onItemSelected;
 
-  const SidebarMenu({super.key, required this.onItemSelected});
+  // const SidebarMenu({super.key, required this.onItemSelected});
+  const SidebarMenu({super.key});
 
+  @override
+  ConsumerState<SidebarMenu> createState() => _SidebarMenuState();
+}
+
+class _SidebarMenuState extends ConsumerState<SidebarMenu> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -32,7 +40,10 @@ class SidebarMenu extends StatelessWidget {
                   Icons.dashboard,
                   "Dashboard",
                   onTap: () {
-                    onItemSelected(const DashboardScreen()); // Update the body
+                    ref
+                        .read(bodyProvider.notifier)
+                        .updateBody(const DashboardScreen());
+                    // onItemSelected(const DashboardScreen()); // Update the body
                     Navigator.pop(context); // Close the drawer
                   },
                 ),
@@ -40,8 +51,9 @@ class SidebarMenu extends StatelessWidget {
                   Icons.inventory,
                   "Inventory",
                   onTap: () {
-                    onItemSelected(const InventoryTab());
-                    Navigator.pop(context);
+                    ref.read(bodyProvider.notifier).updateBody(InventoryTab());
+                    // onItemSelected(InventoryTab(onUpdateBody: onItemSelected));
+                    // Navigator.pop(context);
                   },
                 ),
                 _buildDrawerItem(
@@ -76,20 +88,6 @@ class SidebarMenu extends StatelessWidget {
   }
 
   // Widget _buildDrawerItem(IconData icon, String title, {bool badge = false}) {
-  //   return ListTile(
-  //     leading: Icon(icon, color: Colors.black),
-  //     title: Text(title, style: TextStyle(color: Colors.black)),
-  //     trailing: badge
-  //         ? CircleAvatar(
-  //             radius: 10,
-  //             backgroundColor: Colors.red,
-  //             child: Text("01",
-  //                 style: TextStyle(fontSize: 12, color: Colors.white)),
-  //           )
-  //         : null,
-  //     onTap: () {},
-  //   );
-  // }
   Widget _buildDrawerItem(IconData icon, String title,
       {bool badge = false, VoidCallback? onTap}) {
     return ListTile(

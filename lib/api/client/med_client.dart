@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:graphql/client.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
-import 'package:med_pix/config/config.dart';
+// import 'package:med_pix/config/config.dart';
 
 class MedPixApiClient {
   late GraphQLClient _client;
@@ -18,8 +18,10 @@ class MedPixApiClient {
 
   GraphQLClient _createClient() {
     final HttpLink httpLink = HttpLink(
-      API_SERVER,
-    );
+        // API_SERVER,
+        kIsWeb
+            ? "http://localhost:8080/graphql"
+            : "http://10.0.2.2:8080/graphql");
 
     final AuthLink authLink = AuthLink(
       getToken: _getToken,

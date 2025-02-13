@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:med_pix/providers/body_notifier.dart';
+import 'package:med_pix/screens/tabs/inventory/medicines_screen.dart';
 import 'package:med_pix/widgets/cards/card_1.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class InventoryTab extends StatefulWidget {
+class InventoryTab extends ConsumerStatefulWidget {
   const InventoryTab({super.key});
 
   @override
-  State<InventoryTab> createState() => _InventoryTabState();
+  ConsumerState<InventoryTab> createState() => _InventoryTabState();
 }
 
-class _InventoryTabState extends State<InventoryTab> {
+class _InventoryTabState extends ConsumerState<InventoryTab> {
   List data = [
     {
       "id": 1,
@@ -80,7 +83,12 @@ class _InventoryTabState extends State<InventoryTab> {
                       title: e['title'],
                       description: e['subtitle'],
                       bottomText: e['bottleTitle'],
-                      onTap: () {}),
+                      onTap: () {
+                        // widget.onUpdateBody(MedicinesScreen());
+                        ref
+                            .read(bodyProvider.notifier)
+                            .updateBody(MedicinesScreen());
+                      }),
                 )
                 .toList(),
           ),
